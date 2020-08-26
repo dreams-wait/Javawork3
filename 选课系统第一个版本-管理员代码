@@ -45,11 +45,11 @@ public class Administrator {
 			ResultSet re = stmt.executeQuery(sSql);
 			int flag=0;
 			
-			//µÇÂ¼
-			System.out.println("¹ÜÀíÔ±µÇÂ¼Ò³Ãæ");
-			System.out.println("ÇëÊäÈëÄúµÄµÇÂ¼Ãû£º");
+			//ç™»å½•
+			System.out.println("ç®¡ç†å‘˜ç™»å½•é¡µé¢");
+			System.out.println("è¯·è¾“å…¥æ‚¨çš„ç™»å½•åï¼š");
 			String iName = in.nextLine();
-			System.out.println("ÇëÊäÈëÄúµÄÃÜÂë£º");
+			System.out.println("è¯·è¾“å…¥æ‚¨çš„å¯†ç ï¼š");
 			String iPassword = in.nextLine();	
 			while(re.next()) 
 			{
@@ -62,20 +62,20 @@ public class Administrator {
 //				ll.addEnter(ee);
 				if(iName.equals(name1)&&iPassword.equals(password1))
 				{
-					System.out.println("µÇÂ¼³É¹¦£¡");
+					System.out.println("ç™»å½•æˆåŠŸï¼");
 					flag=1;
 					break;
 				}
 			}
 			if(flag==0)
 			{
-				System.out.println("µÇÂ¼Ê§°Ü£¡");
+				System.out.println("ç™»å½•å¤±è´¥ï¼");
 			}
 			re.close();
 			ResultSet rs = stmt.executeQuery(strSql);
 			if(flag == 1) 
 			{
-//ÉóºË
+//å®¡æ ¸
 				while(rs.next())
 				{
 				int Audio = rs.getInt("audit");
@@ -90,17 +90,17 @@ public class Administrator {
 					String Teacher = rs.getString("teacher");
 					int Count = rs.getInt("count");
 					
-					//ÏÔÊ¾Êý¾Ý¿âÄÚÈÝ
-					System.out.println("¿Î³ÌÃû: " + Name +"  ¿ÎÊ±£º "+Time+" ÒªÇó£º"+Require+" ÄÚÈÝ£º"+Content+" ¿¼ºË£º"+Mode+"  ¿ª°ìÀÏÊ¦£º"+Teacher+" ÊýÁ¿£º"+Count);
+					//æ˜¾ç¤ºæ•°æ®åº“å†…å®¹
+					System.out.println("è¯¾ç¨‹å: " + Name +"  è¯¾æ—¶ï¼š "+Time+" è¦æ±‚ï¼š"+Require+" å†…å®¹ï¼š"+Content+" è€ƒæ ¸ï¼š"+Mode+"  å¼€åŠžè€å¸ˆï¼š"+Teacher+" æ•°é‡ï¼š"+Count);
 
-					System.out.println("ÊäÈëÉóºË½á¹û£º1.ÉóºËÍ¨¹ý    2ÉóºË²»Í¨¹ý");
+					System.out.println("è¾“å…¥å®¡æ ¸ç»“æžœï¼š1.å®¡æ ¸é€šè¿‡    2å®¡æ ¸ä¸é€šè¿‡");
 					Scanner inn = new Scanner(System.in);
 					
 					int choice = inn.nextInt();
 					while(choice>2||choice<1)
 					{
 						
-						System.out.println("ÇëÖØÐÂÊäÈëÉóºË½á¹û£º1.ÉóºËÍ¨¹ý    2ÉóºË²»Í¨¹ý");
+						System.out.println("è¯·é‡æ–°è¾“å…¥å®¡æ ¸ç»“æžœï¼š1.å®¡æ ¸é€šè¿‡    2å®¡æ ¸ä¸é€šè¿‡");
 						choice = in.nextInt();
 					}
 					if(choice==1)
@@ -108,11 +108,11 @@ public class Administrator {
 						String sql = "update course set audit=1";
 						PreparedStatement presta = con.prepareStatement(sql);
 						presta.execute();
-						System.out.println("ÒÑÍ¨¹ýÉóºË£¡");
+						System.out.println("å·²é€šè¿‡å®¡æ ¸ï¼");
 					}
 					else if(choice==2)
 					{
-						System.out.println("ÒÑ¾Ü¾øÉêÇë£¡");
+						System.out.println("å·²æ‹’ç»ç”³è¯·ï¼");
 					}
 						
 				}
@@ -128,7 +128,7 @@ public class Administrator {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			}	
-			System.out.println("ÒÑÈ«²¿ÉóºË½áÊø£¡");
+			System.out.println("å·²å…¨éƒ¨å®¡æ ¸ç»“æŸï¼");
 	    }
 	    
 
