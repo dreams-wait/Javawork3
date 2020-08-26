@@ -25,15 +25,15 @@ public class studentCourse {
 			Connection con = DriverManager.getConnection(strURL,userName,userPass);
 			Statement stmt = con.createStatement();
 			ResultSet rs = stmt.executeQuery(strSql);
-			System.out.println("Ñ¡¿ÎĞÅÏ¢");
+			System.out.println("é€‰è¯¾ä¿¡æ¯");
 			while(rs.next())
 			{
 			String UseName = rs.getString("coursename");
 			String Name = rs.getString("studenntname");
 			int Num = rs.getInt("studentnum");
 			int s = rs.getInt("sum");
-			//ÏÔÊ¾Êı¾İ¿âÄÚÈİ
-			System.out.println("¿ÆÄ¿: " + UseName +" Ñ§ÉúĞÕÃû£º "+Name+"  Ñ¡¿ÎÑ§ÉúÑ§ºÅ£º"+Num+"  Ñ¡¿Î×ÜÈË´Î£º"+s);
+			//æ˜¾ç¤ºæ•°æ®åº“å†…å®¹
+			System.out.println("ç§‘ç›®: " + UseName +" å­¦ç”Ÿå§“åï¼š "+Name+"  é€‰è¯¾å­¦ç”Ÿå­¦å·ï¼š"+Num+"  é€‰è¯¾æ€»äººæ¬¡ï¼š"+s);
 			}
 			rs.close();
 			stmt.close();
