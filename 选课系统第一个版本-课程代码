@@ -22,10 +22,10 @@ public class Course {
 	}
 	public void print(Course c1)
 	{
-		System.out.println("¿Î³ÌÃû³Æ£º "+this.cName);
-		System.out.println("¿Î³ÌÑ§Ê±£º "+this.cTime );
-		System.out.println("¿Î³ÌÒªÇó£º "+this.cRequire);
-		System.out.println("¿Î³ÌÄÚÈİ£º "+this.cContent);
-		System.out.println("¿¼ºË·½Ê½£º "+this.cMode);
+		System.out.println("è¯¾ç¨‹åç§°ï¼š "+this.cName);
+		System.out.println("è¯¾ç¨‹å­¦æ—¶ï¼š "+this.cTime );
+		System.out.println("è¯¾ç¨‹è¦æ±‚ï¼š "+this.cRequire);
+		System.out.println("è¯¾ç¨‹å†…å®¹ï¼š "+this.cContent);
+		System.out.println("è€ƒæ ¸æ–¹å¼ï¼š "+this.cMode);
 	}
 }
