@@ -18,15 +18,15 @@ public class taxt {
 			int chioes;
 			for(;;) 
 			{
-				System.out.println("/********²Ù×÷²Ëµ¥**********/");
-				System.out.println("       1.¹ÜÀíÔ±×¢²á                        " );
-				System.out.println("       2.¹ÜÀíÔ±µÇÂ¼                           ");
-				System.out.println("       3.ÀÏÊ¦×¢²á                               ");
-				System.out.println("       4.ÀÏÊ¦µÇÂ¼                               ");
-				System.out.println("       5.Ñ§Éú×¢²á                               ");
-				System.out.println("       6.Ñ§ÉúµÇÂ¼                               ");
-				System.out.println("       0.ÍË³ö³ÌÐò                               ");
-				System.out.println("/*********²Ù×÷²Ëµ¥*********/");
+				System.out.println("/********æ“ä½œèœå•**********/");
+				System.out.println("       1.ç®¡ç†å‘˜æ³¨å†Œ                        " );
+				System.out.println("       2.ç®¡ç†å‘˜ç™»å½•                           ");
+				System.out.println("       3.è€å¸ˆæ³¨å†Œ                               ");
+				System.out.println("       4.è€å¸ˆç™»å½•                               ");
+				System.out.println("       5.å­¦ç”Ÿæ³¨å†Œ                               ");
+				System.out.println("       6.å­¦ç”Ÿç™»å½•                               ");
+				System.out.println("       0.é€€å‡ºç¨‹åº                               ");
+				System.out.println("/*********æ“ä½œèœå•*********/");
 				chioes = in.nextInt();
 				if(chioes>=0&&chioes<=6)
 				{
@@ -39,7 +39,7 @@ public class taxt {
 			}
 			if(chioes==1)
 			{
-				System.out.println("ÎÞ´ËÈ¨ÏÞ£¡");
+				System.out.println("æ— æ­¤æƒé™ï¼");
 				
 			}
 			if(chioes==2)
@@ -50,7 +50,7 @@ public class taxt {
 			}
 			if(chioes==3)
 			{
-				//ÀÏÊ¦×¢²á
+				//è€å¸ˆæ³¨å†Œ
 				
 				
 			}
@@ -66,7 +66,7 @@ public class taxt {
 			if(chioes==6)
 			{//6
 				String ss = "java";
-				System.out.println("µÇÂ¼ºÍÐÞ¸ÄÐÅÏ¢£º");
+				System.out.println("ç™»å½•å’Œä¿®æ”¹ä¿¡æ¯ï¼š");
 				Student s1 = new Student();
 				String n=s1.denglu();
 				if(n.equals(ss))
@@ -77,12 +77,12 @@ public class taxt {
 				{
 					for(;;) 
 					{
-						System.out.println("|********²Ù×÷²Ëµ¥**********|");
-						System.out.println("|       1.²é¿´¿Î³Ì                       |");
-						System.out.println("|       2.Ñ¡¿Î                               |");
-						System.out.println("|       0.ÍË³ö³ÌÐò                        |");
+						System.out.println("|********æ“ä½œèœå•**********|");
+						System.out.println("|       1.æŸ¥çœ‹è¯¾ç¨‹                       |");
+						System.out.println("|       2.é€‰è¯¾                               |");
+						System.out.println("|       0.é€€å‡ºç¨‹åº                        |");
 						System.out.println("|************************|");
-						System.out.println("|ÇëÊäÈëÄúµÄÑ¡Ôñ£º");
+						System.out.println("|è¯·è¾“å…¥æ‚¨çš„é€‰æ‹©ï¼š");
 						ch1 = in.nextInt();
 						if(ch1>=0&&ch1<=2)
 						{
@@ -90,7 +90,7 @@ public class taxt {
 						}
 						else
 						{
-							System.out.println("ÖØÐÂÊäÈë£º");
+							System.out.println("é‡æ–°è¾“å…¥ï¼š");
 						}
 					}
 					if(ch1 == 1)
@@ -103,7 +103,7 @@ public class taxt {
 					}
 					if(ch1==0)
 					{
-						System.out.println("ÒÑÍË³ö£¡");
+						System.out.println("å·²é€€å‡ºï¼");
 						System.exit(0);
 					}
 						
