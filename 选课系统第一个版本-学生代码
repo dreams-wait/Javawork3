@@ -128,11 +128,11 @@ public class Student {
 		Connection con = DriverManager.getConnection(strURL,userName,userPass);
 		Statement stmt = con.createStatement();
 		int flag=0;
-		//µÇÂ¼ĞŞ¸ÄĞÅÏ¢
-		System.out.println("Ñ§ÉúµÇÂ¼Ò³Ãæ");
-		System.out.println("ÇëÊäÈëÄúµÄµÇÂ¼Ãû£º");
+		//ç™»å½•ä¿®æ”¹ä¿¡æ¯
+		System.out.println("å­¦ç”Ÿç™»å½•é¡µé¢");
+		System.out.println("è¯·è¾“å…¥æ‚¨çš„ç™»å½•åï¼š");
 		iName = in.nextLine();
-		System.out.println("ÇëÊäÈëÄúµÄÃÜÂë£º");
+		System.out.println("è¯·è¾“å…¥æ‚¨çš„å¯†ç ï¼š");
 		iPassword = in.nextLine();	
 		ResultSet re = stmt.executeQuery(sSql);
 		while(re.next()) 
@@ -141,34 +141,34 @@ public class Student {
 			String password1 = re.getString("password");
 			if((iName.equals(name1))&&(iPassword.equals(password1)))
 			{
-				System.out.println("µÇÂ¼³É¹¦£¡");
-				System.out.println("»¶Ó­Äú"+iName);
+				System.out.println("ç™»å½•æˆåŠŸï¼");
+				System.out.println("æ¬¢è¿æ‚¨"+iName);
 				flag=1;
 				break;
 			}
 		}
 		if(flag==0)
 		{
-			System.out.println("µÇÂ¼Ê§°Ü£¡ÃÜÂë»òÕËºÅ´íÎó");
+			System.out.println("ç™»å½•å¤±è´¥ï¼å¯†ç æˆ–è´¦å·é”™è¯¯");
 			return ii;
 		}
-		System.out.println("ÇëÊäÈëÄãµÄÑ¡Ôñ£º    1.ĞŞ¸ÄĞÅÏ¢    2£¬·µ»ØÖ÷Ò³Ãæ");
+		System.out.println("è¯·è¾“å…¥ä½ çš„é€‰æ‹©ï¼š    1.ä¿®æ”¹ä¿¡æ¯    2ï¼Œè¿”å›ä¸»é¡µé¢");
 		int cc = in.nextInt();
 		if(cc==1)
 		{
 			for(;;)
 			{
-				System.out.println("ÇëÊäÈëÄãµÄÑ¡Ôñ£º");
-				System.out.println("1.ĞŞ¸ÄÓÃ»§Ãû");
-				System.out.println("2.ĞŞ¸ÄÃÜÂë");
-				System.out.println("3.ĞŞ¸ÄĞÕÃû");
-				System.out.println("4.ĞŞ¸Ä×¨Òµ");
-				System.out.println("0.ÍË³öĞŞ¸Ä");
-				System.out.println("×¢£ºÆäËûĞÅÏ¢²»¿ÉÒÔĞŞ¸Ä");
+				System.out.println("è¯·è¾“å…¥ä½ çš„é€‰æ‹©ï¼š");
+				System.out.println("1.ä¿®æ”¹ç”¨æˆ·å");
+				System.out.println("2.ä¿®æ”¹å¯†ç ");
+				System.out.println("3.ä¿®æ”¹å§“å");
+				System.out.println("4.ä¿®æ”¹ä¸“ä¸š");
+				System.out.println("0.é€€å‡ºä¿®æ”¹");
+				System.out.println("æ³¨ï¼šå…¶ä»–ä¿¡æ¯ä¸å¯ä»¥ä¿®æ”¹");
 				int cc1 = in.nextInt();
 				if(cc1 == 1)
 				{
-					System.out.println("ÊäÈëĞÂÓÃ»§Ãû£º");
+					System.out.println("è¾“å…¥æ–°ç”¨æˆ·åï¼š");
 					String name4 = in.nextLine();
 					String sql = "update student set usename = 'name4'";
 					PreparedStatement presta = con.prepareStatement(sql);
@@ -176,7 +176,7 @@ public class Student {
 				}
 				if(cc1 == 2)
 				{
-					System.out.println("ÊäÈëĞÂÃÜÂë£º");
+					System.out.println("è¾“å…¥æ–°å¯†ç ï¼š");
 					String password4 = in.nextLine();
 					String sql = "update student set password = 'password4'";
 					PreparedStatement presta = con.prepareStatement(sql);
@@ -184,7 +184,7 @@ public class Student {
 				}
 				if(cc1 == 3)
 				{
-					System.out.println("ÊäÈëĞÂĞÕÃû£º");
+					System.out.println("è¾“å…¥æ–°å§“åï¼š");
 					String name4 = in.nextLine();
 					String sql = "update student set name = 'name4'";
 					PreparedStatement presta = con.prepareStatement(sql);
@@ -192,7 +192,7 @@ public class Student {
 				}
 				if(cc1 == 4)
 				{
-					System.out.println("ÊäÈëĞÂ×¨Òµ£º");
+					System.out.println("è¾“å…¥æ–°ä¸“ä¸šï¼š");
 					String major4 = in.nextLine();
 					String sql = "update student set major = 'major4'";
 					PreparedStatement presta = con.prepareStatement(sql);
@@ -227,7 +227,7 @@ public class Student {
 		Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
 		Statement stmt1 = con1.createStatement();
 		ResultSet r1 = stmt1.executeQuery(strSql);
-		System.out.println("±¾Ñ§ÆÚ¿Î³ÌĞÅÏ¢£º");
+		System.out.println("æœ¬å­¦æœŸè¯¾ç¨‹ä¿¡æ¯ï¼š");
 		while(r1.next())
 		{
 			int Audio = r1.getInt("audit");
@@ -241,7 +241,7 @@ public class Student {
 				String Teacher = r1.getString("teacher");
 				int count1 = r1.getInt("count");
 				
-				System.out.println("¿Î³ÌÃû: " + Name +"  ¿ÎÊ±£º "+Time+" ÒªÇó£º"+Require+" ÄÚÈİ£º"+Content+" ¿¼ºË£º"+Mode+"  ¿ª°ìÀÏÊ¦£º"+Teacher+" ÒÑÑ¡Ñ§ÊıÁ¿£º"+count1);
+				System.out.println("è¯¾ç¨‹å: " + Name +"  è¯¾æ—¶ï¼š "+Time+" è¦æ±‚ï¼š"+Require+" å†…å®¹ï¼š"+Content+" è€ƒæ ¸ï¼š"+Mode+"  å¼€åŠè€å¸ˆï¼š"+Teacher+" å·²é€‰å­¦æ•°é‡ï¼š"+count1);
 				}
 			}
 		r1.close();
@@ -253,7 +253,7 @@ public class Student {
 		}
 		}
 	
-	//Ñ¡¿Î
+	//é€‰è¯¾
 	public void chclass(String name1) {
 		 @SuppressWarnings("resource")
 		Scanner in = new Scanner(System.in);
@@ -286,12 +286,12 @@ public class Student {
 
 				if(xx.equals(USEName))
 				{
-					this.list1.addEnter(enter1);//¼ÇÂ¼µÇÂ¼Í¬Ñ§ÒÑÑ¡¿Î³Ì
+					this.list1.addEnter(enter1);//è®°å½•ç™»å½•åŒå­¦å·²é€‰è¯¾ç¨‹
 				}	
 				Sum++;
 			}
 			
-			System.out.println("ÄãÒÑ¾­Ñ¡ÁËµÄ¿Î³Ì£º");
+			System.out.println("ä½ å·²ç»é€‰äº†çš„è¯¾ç¨‹ï¼š");
 			list1.print();
 			rs.close();
 			ResultSet rr = stmt.executeQuery(strSql);
@@ -305,7 +305,7 @@ public class Student {
 //				enter1.name = mode1;
 //				enter1.num = teacher1;
 				Enter enter1 = new Enter(mode1,CName,teacher1);
-				list2.addEnter(enter1);//¼ÇÂ¼ËùÓĞ¿Î³Ì	List¼¯ºÏÑ­»·´æ´¢¶ÔÏóÊ±£¬µ¼ÖÂÑ­»·ºó¼¯ºÏÖĞÈ«²¿Êı¾İ¶¼ÊÇ×îºóÒ»ÌõµÄÇé¿ö
+				list2.addEnter(enter1);//è®°å½•æ‰€æœ‰è¯¾ç¨‹	Listé›†åˆå¾ªç¯å­˜å‚¨å¯¹è±¡æ—¶ï¼Œå¯¼è‡´å¾ªç¯åé›†åˆä¸­å…¨éƒ¨æ•°æ®éƒ½æ˜¯æœ€åä¸€æ¡çš„æƒ…å†µ
 			}
 
 			
@@ -327,31 +327,31 @@ public class Student {
 				}
 			}
 			int flag=0;
-			System.out.println("Ñ¡¿ÎÄ¿Â¼");
-			System.out.println("Äã¿ÉÒÔÑ¡µÄ¿Î³Ì£º");
+			System.out.println("é€‰è¯¾ç›®å½•");
+			System.out.println("ä½ å¯ä»¥é€‰çš„è¯¾ç¨‹ï¼š");
 			list3.print();
 			if(list3.size()==0)
 			{
-				System.out.println("ÄãÄ¿Ç°Ã»ÓĞ¿ÉÒÔÑ§Ï°µÄ¿Î³Ì£¡ÒÑÍË³ö³ÌĞò");
+				System.out.println("ä½ ç›®å‰æ²¡æœ‰å¯ä»¥å­¦ä¹ çš„è¯¾ç¨‹ï¼å·²é€€å‡ºç¨‹åº");
 				System.exit(0);
 			}
 			else
 			{
 				for(;;) 
 				{
-					System.out.println("ÊäÈëÄãÒªÑ§Ï°µÄ¿Î³Ì£º");
+					System.out.println("è¾“å…¥ä½ è¦å­¦ä¹ çš„è¯¾ç¨‹ï¼š");
 					cname3 = in.nextLine();
 					for(int j2=0;j2<list3.size();j2++)
 					{
 						if((list3.get(j2).cname).equals(cname3))
 						{
-							System.out.println("ËÑË÷³É¹¦"+list3.get(j2).cname);
+							System.out.println("æœç´¢æˆåŠŸ"+list3.get(j2).cname);
 							flag = 1;
 							break;
 						}
 						else
 						{
-							System.out.println("Ã»ÓĞ´Ë¿Î³Ì£¬ÇëÖØĞÂÊäÈëÄãÒªÑ§Ï°µÄ¿Î³Ì£º");
+							System.out.println("æ²¡æœ‰æ­¤è¯¾ç¨‹ï¼Œè¯·é‡æ–°è¾“å…¥ä½ è¦å­¦ä¹ çš„è¯¾ç¨‹ï¼š");
 							cname3 = in.nextLine();
 						}			
 					}
@@ -375,13 +375,13 @@ public class Student {
 			r2.close();
 			if(flag==1) 
 			{
-				System.out.println("ÕıÔÚÂ¼ÈëÊı¾İ¿â");
+				System.out.println("æ­£åœ¨å½•å…¥æ•°æ®åº“");
 				ResultSet r1 = stmt.executeQuery(Sql);
 				String sql = "insert into studentcourse(coursename,studenntname,studentnum,sum) values('"+cname3+"','"+xx+"','"+NUM1+"','"+Sum+"')";
 				PreparedStatement presta = con.prepareStatement(sql);
 				presta.execute();
 				r1.close();
-				System.out.println("¹§Ï²Äã£¡³É¹¦Ñ¡Ñ§  "+cname3);
+				System.out.println("æ­å–œä½ ï¼æˆåŠŸé€‰å­¦  "+cname3);
 			}
 			list1.clear();
 			list2.clear();
@@ -409,37 +409,37 @@ public class Student {
 		Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
 		Statement stmt1 = con1.createStatement();
 		ResultSet r1 = stmt1.executeQuery(strSql);
-		System.out.println("ÇëÊäÈëÄãµÄÓÃ»§Ãû£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„ç”¨æˆ·åï¼š");
 		usename1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄÃÜÂë£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„å¯†ç ï¼š");
 		password1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄÕæÊµĞÕÃû£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„çœŸå®å§“åï¼š");
 		name1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄ×¨Òµ£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„ä¸“ä¸šï¼š");
 		major1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄĞÔ±ğ£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„æ€§åˆ«ï¼š");
 		sex1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄÑ§ºÅ£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„å­¦å·ï¼š");
 		num1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄ°à¼¶£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„ç­çº§ï¼š");
 		class1 = in.nextLine();
-		System.out.println("ÇëÊäÈëÄãµÄÄêÁä£º");
+		System.out.println("è¯·è¾“å…¥ä½ çš„å¹´é¾„ï¼š");
 		age1 = in.nextInt();
 		while(r1.next()) 
 		{
 			String snum = r1.getString("num");
 			while(snum.equals(num1))
 			{
-				System.out.println("ÄãÊäÈëµÄÑ§ºÅ´íÎó£¬ÇëÖØĞÂÊäÈë£º");
+				System.out.println("ä½ è¾“å…¥çš„å­¦å·é”™è¯¯ï¼Œè¯·é‡æ–°è¾“å…¥ï¼š");
 				num1 = in.nextLine();
 			}
 		}
-		System.out.println("ÕıÔÚÂ¼ÈëÊı¾İ¿â");
+		System.out.println("æ­£åœ¨å½•å…¥æ•°æ®åº“");
 		String sql = "insert into student(usename,password,name,age,sex,major,num,class) values('"+usename1+"','"+password1+"','"+name1+"','"+age1+"','"+sex1+"','"+major1+"','"+num1+"','"+class1+"')";
 		PreparedStatement presta = con1.prepareStatement(sql);
 		presta.execute();
 		r1.close();
-		System.out.println("¹§Ï²Äã£¡×¢²á³É¹¦ "+name1);
+		System.out.println("æ­å–œä½ ï¼æ³¨å†ŒæˆåŠŸ "+name1);
 		stmt1.close();
 		con1.close();
 		} catch (Exception e) {
