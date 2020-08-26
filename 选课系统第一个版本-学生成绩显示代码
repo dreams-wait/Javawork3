@@ -8,23 +8,23 @@ public class ColumnModelTest{
     public ColumnModelTest() {
     
    	JFrame f = new JFrame();
-   /*ÓÉÓÚÎÒÃÇµÄMyTableÀà¼Ì³ĞÁËAbstractTableModel²¢ÇÒÊµ×÷ÁËgetColmunCount(),getRowCount(),getValueAt()·½·¨.Òò´ËÎÒÃÇ¿ÉÒÔÍ¨
-    *¹ıMyTableÀ´²úÉúTableModelµÄÊµÌå.
+   /*ç”±äºæˆ‘ä»¬çš„MyTableç±»ç»§æ‰¿äº†AbstractTableModelå¹¶ä¸”å®ä½œäº†getColmunCount(),getRowCount(),getValueAt()æ–¹æ³•.å› æ­¤æˆ‘ä»¬å¯ä»¥é€š
+    *è¿‡MyTableæ¥äº§ç”ŸTableModelçš„å®ä½“.
     */ 
    	MyTable mt=new MyTable();
-   	JTable t=new JTable(mt);//ÎÒÃÇÀûÓÃMyTableÀ´½¨Á¢JTable.
-   	JComboBox c = new JComboBox();//½¨Á¢Ò»¸öJComboBoxµÄ¶ÔÏó.
-//   	c.addItem("Taipei");//ÎÒÃÇÔÚĞÂ½¨Á¢µÄJComboBox¶ÔÏóÀïĞÂÔöÈı¸öÏîÄ¿.
+   	JTable t=new JTable(mt);//æˆ‘ä»¬åˆ©ç”¨MyTableæ¥å»ºç«‹JTable.
+   	JComboBox c = new JComboBox();//å»ºç«‹ä¸€ä¸ªJComboBoxçš„å¯¹è±¡.
+//   	c.addItem("Taipei");//æˆ‘ä»¬åœ¨æ–°å»ºç«‹çš„JComboBoxå¯¹è±¡é‡Œæ–°å¢ä¸‰ä¸ªé¡¹ç›®.
 //   	c.addItem("ChiaYi");
 //   	c.addItem("HsinChu");
-    /*ÎÒÃÇÀûÓÃJTableËùÌá¹©µÄgetTableColumnModel()·½·¨È¡µÃTableColumnModel¶ÔÏó,ÔÙÓÉTableColumnModelÀàËùÌá¹©µÄgetColumn()·½
-     *·¨È¡µÃTableColumn¶ÔÏó,TableColumnÀà¿ÉÕë¶Ô±í¸ñÖĞµÄÃ¿Ò»ĞĞ×ö¾ßÌåµÄÉèÖÃ,ÀıÈçÉèÖÃ×Ö¶ÎµÄ¿í¶È,Ä³ĞĞµÄ±êÍ·,ÉèÖÃÊäÈë½Ï¸´ÔÓµÄ
-     *Êı¾İÀàĞÍµÈµÈ.ÔÚÕâÀï,ÎÒÃÇÀûÓÃTableColumnÀàËùÌá¹©µÄsetCellEditor()·½·¨,½«JComboBox×÷ÎªµÚ¶şĞĞµÄÄ¬ÈÏ±à¼­×é¼ş.
+    /*æˆ‘ä»¬åˆ©ç”¨JTableæ‰€æä¾›çš„getTableColumnModel()æ–¹æ³•å–å¾—TableColumnModelå¯¹è±¡,å†ç”±TableColumnModelç±»æ‰€æä¾›çš„getColumn()æ–¹
+     *æ³•å–å¾—TableColumnå¯¹è±¡,TableColumnç±»å¯é’ˆå¯¹è¡¨æ ¼ä¸­çš„æ¯ä¸€è¡Œåšå…·ä½“çš„è®¾ç½®,ä¾‹å¦‚è®¾ç½®å­—æ®µçš„å®½åº¦,æŸè¡Œçš„æ ‡å¤´,è®¾ç½®è¾“å…¥è¾ƒå¤æ‚çš„
+     *æ•°æ®ç±»å‹ç­‰ç­‰.åœ¨è¿™é‡Œ,æˆ‘ä»¬åˆ©ç”¨TableColumnç±»æ‰€æä¾›çš„setCellEditor()æ–¹æ³•,å°†JComboBoxä½œä¸ºç¬¬äºŒè¡Œçš„é»˜è®¤ç¼–è¾‘ç»„ä»¶.
      */
    	t.getColumnModel().getColumn(1).setCellEditor(new DefaultCellEditor(c));
-   	t.setPreferredScrollableViewportSize(new Dimension(550, 200));//´óĞ¡
+   	t.setPreferredScrollableViewportSize(new Dimension(550, 200));//å¤§å°
     Point p = new Point(100, 100);
-    f.setLocation(p);//Î»ÖÃ
+    f.setLocation(p);//ä½ç½®
         JScrollPane s = new JScrollPane(t);
 //        f.setBounds(x, y, width, height);
         f.getContentPane().add(s, BorderLayout.CENTER);
@@ -49,19 +49,19 @@ public class ColumnModelTest{
 class MyTable extends AbstractTableModel{
 
         Object[][] p = {
-            {"°¢´ô", "Taipei",new Integer(66), 
+            {"é˜¿å‘†", "Taipei",new Integer(66), 
               new Integer(32), new Integer(98), new Boolean(false),new Boolean(false)},
-            {"°¢¹Ï", "ChiaYi",new Integer(85), 
+            {"é˜¿ç“œ", "ChiaYi",new Integer(85), 
               new Integer(69), new Integer(154), new Boolean(true),new Boolean(false)},          
         };
 
-        String[] n = {"ĞÕÃû", 
-        	         "¾Ó×¡µØ",
-                      "ÓïÎÄ",
-                      "ÊıÑ§",
-                      "×Ü·Ö",
-                      "¼°¸ñ",			         
-                      "×÷±×"};
+        String[] n = {"å§“å", 
+        	         "å±…ä½åœ°",
+                      "è¯­æ–‡",
+                      "æ•°å­¦",
+                      "æ€»åˆ†",
+                      "åŠæ ¼",			         
+                      "ä½œå¼Š"};
     
         public int getColumnCount() {
             return n.length;
