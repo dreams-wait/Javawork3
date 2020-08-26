@@ -1,0 +1,554 @@
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.List;
+import java.util.Scanner;
+
+public class Teacher {
+	String useName;
+	String strPassword;
+	String strName;
+	int strAge;
+	String strSex;
+	String strMajor;
+	String strCall;
+	public Teacher(String inUseName,String inpassword,String inname,int inage,String insex,String inmajor,String incall)
+	{
+		this.useName = inUseName;
+		this.strPassword = inpassword;
+		this.strName = inname;
+		this.strAge = inage;
+		this.strSex = insex;
+		this.strMajor = inmajor;
+		this.strCall = incall;
+	}
+	
+
+    public String getUseName() {
+        return useName;
+    }
+ 
+    public void setUseName(String useName) {
+        this.strName = useName;
+    }
+ 
+    public String getPassword() {
+        return strPassword;
+    }
+ 
+    public void setPassword(String password) {
+        this.strPassword = password;
+    }
+ 
+    public String getName() {
+        return strName;
+    }
+ 
+    public void setName(String name) {
+        this.strName = name;
+    }
+ 
+    public int getAge() {
+        return strAge;
+    }
+ 
+    public void setAge(int age) {
+        this.strAge = age;
+    }
+    public String getSex() {
+        return strSex;
+    }
+ 
+    public void setSex(String sex) {
+        this.strSex = sex;
+    }
+    public String getMajor() {
+        return strMajor;
+    }
+ 
+    public void setMajor(String major) {
+        this.strMajor = major;
+    }
+    public String getCall() {
+        return strCall;
+    }
+ 
+    public void setCall(String call) {
+        this.strCall = call;
+    }
+    public String denglu()
+	{
+		Scanner in = new Scanner(System.in);
+		String strCon = "com.mysql.cj.jdbc.Driver";
+		String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+		String userName = "root";
+		String userPass = "root";
+		String strSql = "select * from course";
+		String sSql = "select * from student";
+		String Sql = "select * from studentcourse";
+		String Sq = "select * from teacher";
+		String iName = null;
+		String iPassword = null;
+		String ii ="java";
+		try {
+		Class .forName(strCon);
+		Connection con = DriverManager.getConnection(strURL,userName,userPass);
+		Statement stmt = con.createStatement();
+		
+		int flag=0;
+
+		
+		//登录
+		System.out.println("老师登录页面");
+		System.out.println("请输入您的登录名：");
+		iName = in.nextLine();
+		System.out.println("请输入您的密码：");
+		iPassword = in.nextLine();	
+		ResultSet re = stmt.executeQuery(Sq);
+		while(re.next()) 
+		{
+
+			String name1 = re.getString("name");
+			String password1 = re.getString("password");
+			if((iName.equals(name1))&&(iPassword.equals(password1)))
+			{
+				System.out.println("登录成功！");
+				System.out.println("欢迎您"+iName);
+				flag=1;
+				break;
+			}
+		}
+		if(flag==0)
+		{
+			System.out.println("登录失败！密码或账号错误");
+			return ii;
+		}
+		System.out.println("请输入你的选择：    1.修改信息    2，返回主页面");
+		int cc = in.nextInt();
+		if(cc==1)
+		{
+			for(;;)
+			{
+				System.out.println("请输入你的选择：");
+				System.out.println("1.修改新职称");
+				System.out.println("2.修改密码");
+				System.out.println("3.修改姓名");
+				System.out.println("4.修改专业");
+				System.out.println("0.退出修改");
+				System.out.println("注：其他信息不可以修改");
+				int cc1 = in.nextInt();
+				if(cc1 == 1)
+				{
+					System.out.println("输入新职称：");
+					String call4 = in.nextLine();
+					String sql = "update teacher set call = 'call4'";
+					PreparedStatement presta = con.prepareStatement(sql);
+					presta.execute();
+				}
+				if(cc1 == 2)
+				{
+					System.out.println("输入新密码：");
+					String password4 = in.nextLine();
+					String sql = "update tacher set password = 'password4'";
+					PreparedStatement presta = con.prepareStatement(sql);
+					presta.execute();
+				}
+				if(cc1 == 3)
+				{
+					System.out.println("输入新姓名：");
+					String name4 = in.nextLine();
+					String sql = "update teacher set name = 'name4'";
+					PreparedStatement presta = con.prepareStatement(sql);
+					presta.execute();
+				}
+				if(cc1 == 4)
+				{
+					System.out.println("输入新专业：");
+					String major4 = in.nextLine();
+					String sql = "update teacher set major = 'major4'";
+					PreparedStatement presta = con.prepareStatement(sql);
+					presta.execute();
+				}
+				if(cc1 == 0)
+				{
+					break;
+				}
+				
+				
+			}
+		}
+		re.close();
+		stmt.close();
+		con.close();
+		} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}	
+		return iName;
+    }
+   
+	//注册
+	public  void login()
+	{
+		@SuppressWarnings("resource")
+		Scanner in = new Scanner(System.in);
+		String strCon = "com.mysql.cj.jdbc.Driver";
+		String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+		String userName = "root";
+		String userPass = "root";
+		String strSql = "select * from teacher";
+		
+		String usename1,password1,name1,sex1,major1,call1;
+		int age1;
+	
+		try {
+		Class .forName(strCon);
+		Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
+		Statement stmt1 = con1.createStatement();
+		ResultSet r1 = stmt1.executeQuery(strSql);
+		System.out.println("教师注册：");
+		System.out.println("请输入你的用户名：");
+		usename1 = in.nextLine();
+		System.out.println("请输入你的密码：");
+		password1 = in.nextLine();
+		System.out.println("请输入你的真实姓名：");
+		name1 = in.nextLine();
+		System.out.println("请输入你的专业：");
+		major1 = in.nextLine();
+		System.out.println("请输入你的性别：");
+		sex1 = in.nextLine();
+		System.out.println("请输入你的职称：");
+		call1 = in.nextLine();
+		System.out.println("请输入你的年龄：");
+		age1 = in.nextInt();
+		while(r1.next()) 
+		{
+			String usename2 = r1.getString("usename");
+			while(usename1.equals(usename2))
+			{
+				System.out.println("你输入的用户名重复，请重新输入：");
+				usename1 = in.nextLine();
+			}
+		}
+		System.out.println("正在录入数据库");
+		String sql = "insert into teacher(usename,password,name,age,sex,major,call) values('"+usename1+"','"+password1+"','"+name1+"','"+age1+"','"+sex1+"','"+major1+"','"+call1+"')";
+		PreparedStatement presta = con1.prepareStatement(sql);
+		presta.execute();
+		r1.close();
+		System.out.println("恭喜你！注册成功 "+name1);
+		stmt1.close();
+		con1.close();
+		} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}	
+	}
+	
+	
+	//发布课程
+	public void Issue()
+	{
+		Scanner in = new Scanner(System.in);
+		String strCon = "com.mysql.cj.jdbc.Driver";
+		String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+		String userName = "root";
+		String userPass = "root";
+		String strSql = "select * from course";
+		
+		String name1,require1,content1,mode1,teacher1;
+		int time1,audit1,count1;
+	
+		try {
+		Class .forName(strCon);
+		Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
+		Statement stmt1 = con1.createStatement();
+		ResultSet r1 = stmt1.executeQuery(strSql);
+		System.out.println("请输入课程名：");
+		name1 = in.nextLine();
+		System.out.println("请输入你课时：");
+		time1 = in.nextInt();
+		System.out.println("请输入课程要求：");
+		require1 = in.nextLine();
+		System.out.println("请输入课程内容：");
+		content1 = in.nextLine();
+		System.out.println("请输入考核方式：");
+		mode1 = in.nextLine();
+		System.out.println("请输入任课教师：");
+		teacher1 = in.nextLine();
+		System.out.println("请输入审核状态：");
+		System.out.println("默认为0");
+		audit1 = 0;
+		System.out.println("请输入选课人数：");
+		System.out.println("默认为0");
+		count1 = 0;
+		while(r1.next()) 
+		{
+			String name2 = r1.getString("num");
+			while(name1.equals(name2))
+			{
+				System.out.println("你输入的课程名重复，请重新输入：");
+				name1 = in.nextLine();
+			}
+		}
+		System.out.println("正在录入数据库");
+		String sql = "insert into course(name,time,require,content,mode,teacher,audit,count) values('"+name1+"','"+time1+"','"+require1+"','"+content1+"','"+mode1+"','"+teacher1+"','"+audit1+"','"+count1+"')";
+		PreparedStatement presta = con1.prepareStatement(sql);
+		presta.execute();
+		r1.close();
+		System.out.println("恭喜你！注册成功   "+name1+"  请等待管理员审核");
+		stmt1.close();
+		con1.close();
+		} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+		}		
+	}
+	//查看选课学生，表格
+	
+	//导出名单excel
+//	public void print2()
+//	{
+//		String strCon = "com.mysql.cj.jdbc.Driver";
+//		String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+//		String userName = "root";
+//		String userPass = "root";
+//		String strSql = "select * from course";
+//		try {
+//		Class .forName(strCon);
+//		Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
+//		Statement stmt1 = con1.createStatement();
+//		ResultSet r1 = stmt1.executeQuery(strSql);
+//		System.out.println("本学期课程信息：");
+//		while(r1.next())
+//		{
+//			int Audio = r1.getInt("audit");
+//			if(Audio==1)
+//			{
+//				String Name = r1.getString("name");
+//				String Time = r1.getString("time");
+//				String Require = r1.getString("require");
+//				String Content = r1.getString("content");
+//				String Mode = r1.getString("mode");
+//				String Teacher = r1.getString("teacher");
+//				int count1 = r1.getInt("count");
+//				
+//				System.out.println("课程名: " + Name +"  课时： "+Time+" 要求："+Require+" 内容："+Content+" 考核："+Mode+"  开办老师："+Teacher+" 已选学数量："+count1);
+//			}
+//		}
+//		r1.close();
+//		stmt1.close();
+//		con1.close();
+//		} catch (Exception e) {
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//		}
+//	}
+//		
+
+	
+	
+	
+	
+	//输出
+		
+		 //查看
+//		public void print1()
+//		{
+//			String strCon = "com.mysql.cj.jdbc.Driver";
+//			String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+//			String userName = "root";
+//			String userPass = "root";
+//			String strSql = "select * from course";
+//			try {
+//			Class .forName(strCon);
+//			Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
+//			Statement stmt1 = con1.createStatement();
+//			ResultSet r1 = stmt1.executeQuery(strSql);
+//			System.out.println("本学期课程信息：");
+//			while(r1.next())
+//			{
+//				int Audio = r1.getInt("audit");
+//				if(Audio==1)
+//				{
+//					String Name = r1.getString("name");
+//					String Time = r1.getString("time");
+//					String Require = r1.getString("require");
+//					String Content = r1.getString("content");
+//					String Mode = r1.getString("mode");
+//					String Teacher = r1.getString("teacher");
+//					int count1 = r1.getInt("count");
+//					
+//					System.out.println("课程名: " + Name +"  课时： "+Time+" 要求："+Require+" 内容："+Content+" 考核："+Mode+"  开办老师："+Teacher+" 已选学数量："+count1);
+//					}
+//				}
+//			r1.close();
+//			stmt1.close();
+//			con1.close();
+//			} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			}
+//			}
+//	//选课
+//	public void chclass(String name1) {
+//		 @SuppressWarnings("resource")
+//		Scanner in = new Scanner(System.in);
+//			String strCon = "com.mysql.cj.jdbc.Driver";
+//			String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+//			String userName = "root";
+//			String userPass = "root";
+//			String Sql = "select * from studentcourse";
+//			String strSql = "select * from course";
+//			String sSql = "select * from student";
+//			list1 = new LIST();
+//			list2 = new LIST();
+//			list3 = new LIST();
+////			list1=null;
+//			String NUM1 = null;
+//			String xx =name1;
+//			String cname3 = null;
+//			int Sum=0;
+//			try {
+//			Class .forName(strCon);
+//			Connection con = DriverManager.getConnection(strURL,userName,userPass);
+//			Statement stmt = con.createStatement();
+//			ResultSet rs = stmt.executeQuery(Sql);
+//			while(rs.next())
+//			{
+//				String CName = rs.getString("coursename");
+//				String USEName = rs.getString("studenntname");
+//				String Num = rs.getString("studentnum");
+//				Enter enter1 = new Enter(USEName,CName,Num);
+////				enter1.cname  = CName;
+////				System.out.println(enter1.cname );
+////				enter1.name = USEName;
+////				System.out.println(enter1.name);
+////				enter1.num = Num;
+////				enter1.Enter(USEName,CName,Num);
+////				System.out.println(enter1.num);
+//
+//				if(xx.equals(USEName))
+//				{
+//					this.list1.addEnter(enter1);//记录登录同学已选课程
+//				}	
+//				Sum++;
+//			}
+//			
+//			System.out.println("你已经选了的课程：");
+//			list1.print();
+//			rs.close();
+//			ResultSet rr = stmt.executeQuery(strSql);
+//			while(rr.next())
+//			{
+//				
+//				String CName = rr.getString("name");
+//				String mode1 = rr.getString("mode");
+//				String teacher1 = rr.getString("teacher");
+////				enter1.cname  = CName;
+////				enter1.name = mode1;
+////				enter1.num = teacher1;
+//				Enter enter1 = new Enter(mode1,CName,teacher1);
+//				list2.addEnter(enter1);//记录所有课程	List集合循环存储对象时，导致循环后集合中全部数据都是最后一条的情况
+//			}
+////			System.out.println("全部课程：");
+////			list2.print();
+//			
+//			rr.close();		
+//			list3=list2;
+//			for(int j1=0;j1<list1.size();j1++)
+//			{
+//				for(int s=0;s<list2.size();s++)
+//				{
+////					 temp1 =new Enter();
+////					 Enter temp2 =new Enter();
+//					Enter temp1 =list2.get(s);
+//					Enter temp2 =list1.get(j1);
+//					if((temp1.cname).equals(temp2.cname))
+//					{
+//						list3.remove(temp1); 
+//						break;
+//					}
+//				}
+//			}
+//				
+//			int flag=0;
+//			System.out.println("选课目录");
+//			System.out.println("你可以选的课程：");
+//			list3.print();
+//			if(list3.size()==0)
+//			{
+//				System.out.println("你目前没有可以学习的课程！已退出程序");
+//				System.exit(0);
+//			}
+//			else
+//			{
+//				for(;;) 
+//				{
+//					System.out.println("输入你要学习的课程：");
+//					cname3 = in.nextLine();
+//					for(int j2=0;j2<list3.size();j2++)
+//					{
+//						if((list3.get(j2).cname).equals(cname3))
+//						{
+//							System.out.println("搜索成功"+list3.get(j2).cname);
+//							flag = 1;
+//							break;
+//						}
+//						else
+//						{
+//							System.out.println("没有此课程，请重新输入你要学习的课程：");
+//							cname3 = in.nextLine();
+//						}
+//						
+//					}
+//					if(flag == 1)
+//					{
+//						break;
+//					}
+//				}
+//			}
+//			
+//			ResultSet r2 = stmt.executeQuery(sSql);
+//			while(r2.next())
+//			{
+//				String Name1 = r2.getString("name");
+//				String Num1 = r2.getString("num");
+//				if(Name1.equals(xx))
+//				{
+//					NUM1 = Num1;
+//				}
+//			}
+//			Sum=Sum+1;
+//			r2.close();
+//			if(flag==1) 
+//			{
+//				System.out.println("正在录入数据库");
+//				ResultSet r1 = stmt.executeQuery(Sql);
+//				String sql = "insert into studentcourse(coursename,studenntname,studentnum,sum) values('"+cname3+"','"+xx+"','"+NUM1+"','"+Sum+"')";
+//				PreparedStatement presta = con.prepareStatement(sql);
+//				presta.execute();
+//				r1.close();
+//				System.out.println("恭喜你！成功选学  "+cname3);
+//			}
+//			list1.clear();
+//			list2.clear();
+//			list3.clear();
+//			stmt.close();
+//			con.close();
+//			} catch (Exception e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			}	
+//	    }
+//
+//		
+//		
+//	}
+		
+
+//}
+
+}
