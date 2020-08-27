@@ -1,0 +1,71 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Student extends JFrame implements ActionListener{
+	JFrame frame;
+	String useName;
+	JButton look = new JButton("查看课程");
+	JButton choise = new JButton("选学课程");
+	JButton alter = new JButton("修改个人信息");
+	JLabel hint = new JLabel("学生登录成功");
+	JButton no = new JButton("返回");
+	public Student(String name1)
+	{
+		useName = name1;
+		frame = new JFrame("学生操作选择");
+		setTitle("学生操作选择");
+		setLayout(null);
+		look.setBounds(250,110,100,60);
+		hint.setBounds(250,50,100,60);
+		alter.setBounds(200,400,200,60);
+		choise.setBounds(250,200,100,60);
+		no.setBounds(250,300,100,60);
+		add(alter);
+		add(hint);
+		add(look);
+		add(choise);
+		add(no);
+		look.addActionListener(this);
+		alter.addActionListener(this);
+		choise.addActionListener(this);
+		no.addActionListener(this);
+		setVisible(true);
+		setBounds(400,100,600,600);
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == look)
+		{
+			new cLook(useName);
+			this.dispose();
+		}
+		if(e.getSource() == choise)
+		{
+			
+			new Chiose(useName);
+			this.dispose();
+		}
+		if(e.getSource() == no)
+		{
+			String st = "student";
+			new Enter(st);
+			this.dispose();
+		}
+		if(e.getSource() == alter)
+		{
+			new Alter(useName);
+			this.dispose();
+		}
+		
+
+	}
+
+}

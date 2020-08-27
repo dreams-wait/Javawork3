@@ -1,0 +1,77 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Teacher extends JFrame implements ActionListener{
+	JFrame frame;
+	String useName;
+	JLabel hint = new JLabel("老师登录成功");
+	JButton TeAlter = new JButton("修改个人信息");
+	JButton look = new JButton("查看课程");
+	JButton issue = new JButton("发布课程");
+	JButton print = new JButton("打印名单");
+	JButton back = new JButton("返回");
+	
+	public Teacher(String name1)
+	{
+		useName = name1;
+		frame = new JFrame("老师操作选择");
+		setTitle("老师操作选择");
+		setLayout(null);
+		hint.setBounds(250,100,200,30);
+		look.setBounds(250,170,100,50);
+		issue.setBounds(250,240,100,50);
+		print.setBounds(250,310,100,50);
+		back.setBounds(250,380,100,50);
+		TeAlter.setBounds(210,450,200,50);
+		add(hint);
+		add(look);
+		add(TeAlter);
+		add(issue);
+		add(print);
+		add(back);
+		look.addActionListener(this);
+		TeAlter.addActionListener(this);
+		issue.addActionListener(this);
+		print.addActionListener(this);
+		back.addActionListener(this);
+		setVisible(true);
+		setBounds(400,100,600,600);
+		
+	}
+
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==look)
+		{
+			new TLook1(useName);
+			this.dispose();
+		}
+		if(e.getSource()==TeAlter)
+		{
+			new TAlter(useName);
+			this.dispose();
+		}
+		if(e.getSource()==back)
+		{
+			new system();
+			this.dispose();
+		}
+		if(e.getSource()==issue)
+		{
+			new Issue(useName);
+			this.dispose();
+		}
+		if(e.getSource()==print)
+		{
+			new Crea2(useName);
+			this.dispose();
+		}
+	}
+
+}

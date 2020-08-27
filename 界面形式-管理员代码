@@ -1,0 +1,58 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Administrator extends JFrame implements ActionListener{
+	JFrame frame;
+	Connection con;
+	Statement stmt;
+	
+	JLabel hint1 = new JLabel(" 欢迎您管理员");
+	JLabel hint2  = new JLabel("选择“开始审核”进行审核");
+	JButton begin  = new JButton("开始审核");
+	JButton no  = new JButton("返回");
+	
+	public Administrator()
+	{
+		frame=new JFrame("管理员审核");
+		setTitle("管理员审核");
+		setLayout(null);
+		
+		hint1.setBounds(200,150,300,30);
+		hint2.setBounds(200,200,300,50);
+		begin.setBounds(200,300,100,50);
+		no.setBounds(200,400,100,50);
+		
+		add(hint1);
+		add(hint2);
+		add(begin);
+		add(no);
+		
+		begin.addActionListener(this);
+		no.addActionListener(this);
+		
+		setVisible(true);
+		setBounds(400,100,600,600);
+	}
+	
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==no)
+		{
+			new system();
+			this.dispose();
+		}
+		if(e.getSource()==begin)
+		{
+			new Audit();
+			this.dispose();
+		}
+	}
+	
+}
