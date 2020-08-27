@@ -18,21 +18,21 @@ public class Enter extends JFrame implements ActionListener{
 	JFrame frame; 
 	Statement stmt;
 
-	JLabel usename = new JLabel("ÓÃ»§Ãû");
-	JLabel password=new JLabel("ÃÜÂë");
+	JLabel usename = new JLabel("ç”¨æˆ·å");
+	JLabel password=new JLabel("å¯†ç ");
 
 	JTextField usename1 = new JTextField(10);
 	JTextField password1 = new JTextField(10);
 	
-	JButton yes = new JButton("È·ÈÏ");
-	JButton no  = new JButton("·µ»Ø");
-	JButton retur  = new JButton("ÖØÖÃ");
-	JButton add = new JButton("×¢²á");
+	JButton yes = new JButton("ç¡®è®¤");
+	JButton no  = new JButton("è¿”å›");
+	JButton retur  = new JButton("é‡ç½®");
+	JButton add = new JButton("æ³¨å†Œ");
 	public Enter(String name)
 	{
 		Name = name;
-		frame=new JFrame("ÏµÍ³µÇÂ¼");
-		setTitle("ÏµÍ³µÇÂ¼");
+		frame=new JFrame("ç³»ç»Ÿç™»å½•");
+		setTitle("ç³»ç»Ÿç™»å½•");
 		setLayout(null);
 		
 		usename.setBounds(100,150,100,50);
@@ -115,8 +115,8 @@ public class Enter extends JFrame implements ActionListener{
 					String password2 = re.getString("password");
 					if((str1.equals(name2))&&(str2.equals(password2)))
 					{
-						System.out.println("Ñ§ÉúµÇÂ¼³É¹¦£¡");
-						System.out.println("»¶Ó­Äú"+str1);
+						System.out.println("å­¦ç”Ÿç™»å½•æˆåŠŸï¼");
+						System.out.println("æ¬¢è¿æ‚¨"+str1);
 						flag=1;
 						re.close();
 						new Student(str1);
@@ -126,7 +126,7 @@ public class Enter extends JFrame implements ActionListener{
 				}
 				if(flag==0)
 				{
-					System.out.println("µÇÂ¼Ê§°Ü£¡ÃÜÂë»òÕËºÅ´íÎó");
+					System.out.println("ç™»å½•å¤±è´¥ï¼å¯†ç æˆ–è´¦å·é”™è¯¯");
 					re.close();
 					new system();
 					this.dispose();
@@ -142,7 +142,7 @@ public class Enter extends JFrame implements ActionListener{
 					String password2 = ra.getString("password");
 					if(str1.equals(name2)&&str2.equals(password2))
 					{
-						System.out.println("¹ÜÀíÔ±µÇÂ¼³É¹¦£¡");
+						System.out.println("ç®¡ç†å‘˜ç™»å½•æˆåŠŸï¼");
 						flag=1;
 						ra.close();
 						new Administrator();
@@ -153,7 +153,7 @@ public class Enter extends JFrame implements ActionListener{
 				if(flag==0)
 				{
 					ra.close();
-					System.out.println("¹ÜÀíÔ±µÇÂ¼Ê§°Ü£¡ÃÜÂë»òÕËºÅ´íÎó");
+					System.out.println("ç®¡ç†å‘˜ç™»å½•å¤±è´¥ï¼å¯†ç æˆ–è´¦å·é”™è¯¯");
 					new system();
 					this.dispose();
 				}
@@ -169,7 +169,7 @@ public class Enter extends JFrame implements ActionListener{
 					String password2 = rt.getString("password");
 					if(str1.equals(name2)&&str2.equals(password2))
 					{
-						System.out.println("½ÌÊ¦µÇÂ¼³É¹¦£¡");
+						System.out.println("æ•™å¸ˆç™»å½•æˆåŠŸï¼");
 						flag=1;
 						rt.close();
 						new Teacher(str1);
@@ -179,7 +179,7 @@ public class Enter extends JFrame implements ActionListener{
 				}
 				if(flag==0)
 				{
-					System.out.println("½ÌÊ¦µÇÂ¼Ê§°Ü£¡ ÃÜÂë»òÕËºÅ´íÎó");
+					System.out.println("æ•™å¸ˆç™»å½•å¤±è´¥ï¼ å¯†ç æˆ–è´¦å·é”™è¯¯");
 					rt.close();
 					new system();
 					this.dispose();
