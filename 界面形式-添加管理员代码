@@ -1,0 +1,61 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Add extends JFrame implements ActionListener{
+
+	JFrame frame;
+	JLabel administrator1 = new JLabel("此页面没有管理员注册权限！");
+	JButton teacher = new JButton("教师");
+	JButton student = new JButton("学生");
+	JButton no = new JButton("返回");
+	public Add()
+	{
+		frame = new JFrame("注册身份选择");
+		setTitle("注册身份选择");
+		setLayout(null);
+		
+		administrator1.setBounds(250,100,200,30);
+		teacher.setBounds(250,200,100,60);
+		student.setBounds(250,300,100,60);
+		no.setBounds(250,400,100,60);
+		add(administrator1);
+		add(teacher);
+		add(student);
+		add(no);
+		teacher.addActionListener(this);
+		student.addActionListener(this);
+		no.addActionListener(this);
+		setVisible(true);
+		setBounds(400,100,600,600);
+		
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == teacher)
+		{
+			new AddTeacher();
+			this.dispose();
+		}
+		if(e.getSource() == student)
+		{
+			new AddStudent();
+			this.dispose();
+		}
+
+		if(e.getSource() == no)
+		{
+			new system();
+			this.dispose();
+			
+		}
+	}
+
+}

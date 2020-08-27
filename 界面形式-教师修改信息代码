@@ -1,0 +1,161 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class TAlter extends JFrame implements ActionListener
+{
+	JFrame frame;
+	Connection con;
+	Statement stmt;
+	String sName,useName,sAge,sPassword,sClass,sSex,sMajor,sNum;
+	int Age,flag=0;
+	String str2;
+	
+	JLabel hint1 = new JLabel("用户名");
+	JLabel hint2  = new JLabel(sName);
+	JLabel hint3 = new JLabel("密码");
+	JTextField hint4 = new JTextField(20);
+	JLabel hint5  = new JLabel("姓名");
+	JTextField hint6 = new JTextField(20);
+	JLabel hint7  = new JLabel("年龄");
+	JTextField hint8 = new JTextField(20);
+	JLabel hint9 = new JLabel("性别");
+	JTextField hint10  = new JTextField(20);
+	JLabel hint11 = new JLabel("专业");
+	JTextField hint12 = new JTextField(20);
+	JLabel hint13  = new JLabel("职称");
+	JTextField hint14 = new JTextField(20);
+
+	JButton yes = new JButton("确定");
+	JButton retur = new JButton("重置");
+	JButton back = new JButton("返回");
+	
+	
+	
+	public TAlter(String name)
+	{
+		sName=name;
+		frame=new JFrame("老师修改个人信息");
+		setTitle("老师修改个人信息");
+		setLayout(null);
+		hint2  = new JLabel(sName);
+		hint1.setBounds(100,50,100,30);
+		hint2.setBounds(200,50,150,30);
+		hint3.setBounds(100,100,100,30);
+		hint4.setBounds(200,100,150,30);
+		hint5.setBounds(100,150,100,30);
+		hint6.setBounds(200,150,150,30);
+		hint7.setBounds(100,200,100,30);
+		hint8.setBounds(200,200,150,30);
+		hint9.setBounds(100,250,100,30);
+		hint10.setBounds(200,250,150,30);
+		hint11.setBounds(100,300,100,30);
+		hint12.setBounds(200,300,150,30);
+		hint13.setBounds(100,350,100,30);
+		hint14.setBounds(200,350,150,30);
+		yes.setBounds(50,470,100,50);
+		retur.setBounds(250,470,100,50);
+		back.setBounds(450,470,100,50);
+		
+		
+		add(hint1);
+		add(hint2);
+		add(hint3);
+		add(hint4);
+		add(hint5);
+		add(hint6);
+		add(hint7);
+		add(hint8);
+		add(hint9);
+		add(hint10);
+		add(hint11);
+		add(hint12);
+		add(hint13);
+		add(hint14);
+		add(yes);
+		add(retur);
+		add(back);
+		yes.addActionListener(this);
+		retur.addActionListener(this);
+		back.addActionListener(this);
+		
+		setVisible(true);
+		setBounds(400,100,600,600);
+	}
+
+	
+	@SuppressWarnings("unused")
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==yes)
+		{
+			try {
+				String strCon = "com.mysql.cj.jdbc.Driver";
+				String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+				String userName = "root";
+				String userPass = "root";
+				Class .forName(strCon);
+				 con = DriverManager.getConnection(strURL,userName,userPass);
+			     
+			     stmt=con.createStatement();
+				String sSql = "select * from teacher1";
+				ResultSet rs = stmt.executeQuery(sSql);
+				while(rs.next())
+				{
+					
+					String Name1 = rs.getString("usename");
+					if(sName.equals(Name1))
+					{
+						String name1=Name1;
+						String str4=hint4.getText();
+						String str6=hint6.getText();
+						String str8=hint8.getText();
+						String str10=hint10.getText();
+						String str12=hint12.getText();
+						String str14=hint14.getText();
+						int x = Integer.valueOf(str8);
+						String sql1 = "update teacher1 set password='"+str4+"',name='"+str6+"',age="+x+",sex='"+str10+"',major='"+str12+"',call1='"+str14+"'  where usename='"+name1+"'";
+						stmt.executeUpdate(sql1);
+						System.out.println("修改信息成功！");
+						break;			
+					}
+				}
+				rs.close();
+				stmt.close();
+				con.close();
+				} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					}
+				new Teacher(sName);
+				this.dispose();
+		}
+		if(e.getSource()==back)
+		{
+			new Teacher(sName);
+			this.dispose();
+			
+		}
+		if(e.getSource()==retur)
+		{
+			hint4.setText("");
+			hint6.setText("");
+			hint8.setText("");
+			hint10.setText("");
+			hint12.setText("");
+			hint14.setText("");
+		}
+	}
+}
+	
+

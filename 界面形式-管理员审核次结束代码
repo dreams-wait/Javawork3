@@ -1,0 +1,38 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class Hint1 extends JFrame implements ActionListener{
+	JFrame frame;
+	JLabel hint1 = new JLabel("全部课程已审核结束，返回主页面");
+	JButton back = new JButton("返回主页面");
+	public Hint1()
+	{
+		frame = new JFrame("审核结束");
+		setTitle("审核结束");
+		setLayout(null);
+		
+		hint1.setBounds(150,100,150,30);
+		back.setBounds(200,350,100,60);
+		
+		add(hint1);
+		add(back);
+		back.addActionListener(this);
+		setVisible(true);
+		setBounds(400,100,600,600);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==back)
+		{
+			new Administrator();
+			this.dispose();
+		}
+		
+	}
+
+}

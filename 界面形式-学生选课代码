@@ -1,0 +1,205 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Chiose extends JFrame implements ActionListener{
+	JFrame frame; 
+	Connection con;
+	String useName;
+	Statement stmt;
+	String num;
+	String Name,str1;
+	int sum = 0;
+	JLabel cCourse = new JLabel("选学课程名");
+	JTextField cCourse1 = new JTextField(10);
+	JButton yes = new JButton("确认");
+	JButton no  = new JButton("返回");
+	JButton retur  = new JButton("重置");
+	public Chiose(String name)
+	{
+		useName = name;
+		frame=new JFrame("选课系统");
+		setTitle("选课系统");
+		setLayout(null);
+		
+		cCourse.setBounds(100,200,100,50);
+		cCourse1.setBounds(200,210,200,30);
+		yes.setBounds(100,350, 100, 50);
+		no.setBounds(250, 350, 100,50);
+		retur.setBounds(400, 350, 100, 50);
+		
+		add(cCourse);
+		add(cCourse1);
+		add(yes);
+		add(no);
+		add(retur);
+		yes.addActionListener(this);
+		no.addActionListener(this);
+		retur.addActionListener(this);
+		
+		setVisible(true);
+		setBounds(400,100,600,600);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==no)
+		{
+			new Student(useName);
+			this.dispose();
+		}
+		if(e.getSource()==retur)
+		{
+			cCourse1.setText("");
+		}
+		if(e.getSource()==yes)
+		{
+			
+
+			String strCon = "com.mysql.cj.jdbc.Driver";
+			String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+			String userName = "root";
+			String userPass = "root";
+			
+			
+			
+				
+			try {
+				 Class .forName(strCon);
+				 con = DriverManager.getConnection(strURL,userName,userPass);
+				 stmt = con.createStatement();
+			} catch (Exception e1 ) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}
+			
+			int flag=0,flag1 = 0;
+			try {
+				Class .forName(strCon);
+				 con = DriverManager.getConnection(strURL,userName,userPass);
+				 stmt = con.createStatement();
+				str1=cCourse1.getText();
+				String sSql = "select * from student";
+				ResultSet rs = stmt.executeQuery(sSql);
+				while(rs.next())
+				{
+					String uName = rs.getString("usename");
+					String num1 = rs.getString("num");
+					String name1 = rs.getString("name");
+					if(uName.equals(useName))
+					{
+						num = num1;
+						Name = name1;
+					}
+				}
+				rs.close();
+				stmt.close();
+				con.close();
+			} catch (Exception e1 ) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}
+			try {
+				 Class .forName(strCon);
+				 con = DriverManager.getConnection(strURL,userName,userPass);
+				 stmt = con.createStatement();
+				String cSql = "select * from studentcourse";
+				ResultSet re1 = stmt.executeQuery(cSql);
+				
+				while(re1.next())
+				{
+					sum++;
+					
+				}
+				stmt.close();
+				con.close();
+				re1.close();
+				String c1Sql = "select * from studentcourse";
+				Class .forName(strCon);
+				 con = DriverManager.getConnection(strURL,userName,userPass);
+				 stmt = con.createStatement();
+				ResultSet re = stmt.executeQuery(c1Sql);
+				while(re.next()) 
+				{
+					String cname = re.getString("coursename");
+					String name = re.getString("studenntname");
+					if((str1.equals(cname))&&(Name.equals(name)))
+					{
+						System.out.println("你之前已选次课程");
+						stmt.close();
+						con.close();
+						re.close();
+						new Student(useName);
+						this.dispose();
+						flag=1;
+						break;
+					}
+					
+				}
+				stmt.close();
+				con.close();
+				re.close();
+			} catch (Exception e1 ) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}	
+			try {
+				String Sql = "select * from course";
+				Class .forName(strCon);
+				 con = DriverManager.getConnection(strURL,userName,userPass);
+				 stmt = con.createStatement();
+				ResultSet rc1 = stmt.executeQuery(Sql);
+				while(rc1.next())
+				{
+					String cname = rc1.getString("name1");
+					if(cname.equals(str1))
+					{
+						flag1 = 1;
+					}
+				}
+				rc1.close();
+				if(flag1==0)
+				{
+					System.out.println("没有此课程");
+					stmt.close();
+					con.close();
+					new Student(useName);
+					this.dispose();
+				}
+				
+				if(flag == 0&&flag1==1)
+				{
+					String c2Sql = "select * from studentcourse";
+					ResultSet rc = stmt.executeQuery(c2Sql);
+					System.out.println("正在录入数据库");
+					String sql = "insert into studentcourse(coursename,studenntname,studentnum,sum) values('"+str1+"','"+Name+"','"+num+"','"+(sum+1)+"')";
+					PreparedStatement presta = con.prepareStatement(sql);
+					presta.execute();
+					rc.close();
+					System.out.println("恭喜你！成功选学  "+str1);
+				}
+				stmt.close();
+				con.close();
+				new Student(useName);
+				this.dispose();
+			} catch (Exception e1 ) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+				}	
+			
+			
+		}
+		
+	}
+
+}

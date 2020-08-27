@@ -1,0 +1,71 @@
+import java.awt.Color;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+
+public class system extends JFrame implements ActionListener{
+	JFrame frame;
+	JButton administrator = new JButton("管理员");
+	JButton teacher = new JButton("教师");
+	JButton student = new JButton("学生");
+	JButton no = new JButton("返回");
+	public system()
+	{
+		frame = new JFrame("身份选择");
+		setTitle("身份选择");
+		setLayout(null);
+		
+		administrator.setBounds(250,100,100,60);
+		teacher.setBounds(250,200,100,60);
+		student.setBounds(250,300,100,60);
+		no.setBounds(250,400,100,60);
+		add(administrator);
+		add(teacher);
+		add(student);
+		add(no);
+		administrator.addActionListener(this);
+		teacher.addActionListener(this);
+		student.addActionListener(this);
+		no.addActionListener(this);
+		setVisible(true);
+		setBounds(400,100,600,600);
+		frame.setForeground(Color.blue);
+		no.setForeground(Color.blue);
+		student.setForeground(Color.blue);
+		teacher.setForeground(Color.blue);
+		administrator.setForeground(Color.blue);
+		
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource() == administrator)
+		{
+			String ad = "administrator";
+			new Enter(ad);
+			this.dispose();
+		}
+		if(e.getSource() == teacher)
+		{
+			String te = "teacher";
+			new Enter(te);
+			this.dispose();
+		}
+		if(e.getSource() == student)
+		{
+			String st = "student";
+			new Enter(st);
+			this.dispose();
+		}
+		if(e.getSource() == no)
+		{
+			new Menu();
+			this.dispose();
+			
+		}
+	}
+
+}

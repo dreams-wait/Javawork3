@@ -1,0 +1,113 @@
+
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.JFrame;
+
+import jxl.Workbook;
+import jxl.write.Label;
+import jxl.write.WritableSheet;
+import jxl.write.WritableWorkbook;
+import jxl.write.WriteException;
+import jxl.write.biff.RowsExceededException;
+
+
+public class CreateExcel {
+	String CName;
+	static String Name;
+	int n = 0;
+//	public CreateExcel(String name,String cname)
+//	{
+//		CName = cname;
+//		Name = name;
+//	}
+
+    public CreateExcel(String cname,String name)
+            throws IOException, RowsExceededException, WriteException {
+        //1:创建excel文件
+        File file=new File("C:\\Users\\zhangshouqiang\\eclipse-workspace\\Javawork2\\test.xls");
+        file.createNewFile();
+        CName = cname;
+		Name = name;
+
+        //2:创建工作簿
+        WritableWorkbook workbook=Workbook.createWorkbook(file);
+        //3:创建sheet,设置第二三四..个sheet，依次类推即可
+        WritableSheet sheet=workbook.createSheet("用户管理", 0);
+        //4：设置titles
+        String[] titles={"序号","科目","姓名","学号"};
+        //5:单元格
+        Label label=null;
+        //6:给第一行设置列名
+        for(int i=0;i<titles.length;i++){
+            //x,y,第一行的列名
+            label=new Label(i,0,titles[i]);
+            //7：添加单元格
+            sheet.addCell(label);
+        }
+        //8：模拟数据库导入数据
+        String strCon = "com.mysql.cj.jdbc.Driver";
+		String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+		String userName = "root";
+		String userPass = "root";
+		String tSql = "select * from studentcourse";
+		try {
+		Class .forName(strCon);
+		Connection con = DriverManager.getConnection(strURL,userName,userPass);
+		Statement stmt = con.createStatement();
+		int flag=0;
+		ResultSet re = stmt.executeQuery(tSql);
+		int i = 1,j=0;
+		while(re.next()) 
+		{
+			String cname1 = re.getString("coursename");
+			if(CName.equals(cname1))
+			{
+				String cname2 = re.getString("coursename");
+				String name2 = re.getString("studenntname");
+				String num2 = re.getString("studentnum");
+				
+				label=new Label(0,i,j+"");
+	            sheet.addCell(label);
+	            
+	            label=new Label(1,i,cname2);
+	            sheet.addCell(label);
+	            
+	            label=new Label(2,i,name2);
+	            sheet.addCell(label);
+	            
+	            label=new Label(3,i,num2);
+	            sheet.addCell(label);
+	            i++;
+	            j++;
+			}
+			
+		}
+		
+		re.close();
+		
+	        
+		}catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			}
+		
+        //写入数据，一定记得写入数据，不然你都开始怀疑世界了，excel里面啥都没有
+        workbook.write();
+        //最后一步，关闭工作簿
+        workbook.close();
+       new EOver(Name);
+    }
+
+
+
+    
+}

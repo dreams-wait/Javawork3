@@ -1,0 +1,43 @@
+
+
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+
+public class EOver extends JFrame implements ActionListener{
+	String Name;
+
+	JFrame frame;
+	JLabel hint1 = new JLabel("打印成功！返回主页面");
+	JButton back = new JButton("返回主页面");
+	public EOver(String name)
+	{
+		Name = name;
+		frame = new JFrame("导出成功");
+		setTitle("导出成功");
+		setLayout(null);
+		
+		hint1.setBounds(200,200,300,30);
+		back.setBounds(210,250,100,60);
+		
+		add(hint1);
+		add(back);
+		back.addActionListener(this);
+		setVisible(true);
+		setBounds(400,100,600,600);
+	}
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==back)
+		{
+			new Teacher(Name);
+			this.dispose();
+		}
+		
+	}
+
+}

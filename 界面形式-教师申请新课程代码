@@ -1,0 +1,187 @@
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JTextField;
+
+public class Issue  extends JFrame implements ActionListener{
+
+
+	JFrame frame; 
+
+	String ct,Tname;
+	int time3=0;
+
+	JLabel cname = new JLabel("课程名");
+	JLabel ctime =new JLabel("课时");
+	JLabel crequire = new JLabel("要求");
+	JLabel ccontent = new JLabel("内容");
+	JLabel cmode = new JLabel("模式");
+	JLabel cteacher = new JLabel("教师");
+	JLabel cteacher1 = new JLabel(ct);
+	JLabel caudit = new JLabel("审核");
+	JLabel caudit1 = new JLabel("默认值0");
+
+	JTextField cname1 = new JTextField(20);
+	JTextField ctime1 = new JTextField(20);
+	JTextField crequire1 = new JTextField(20);
+	JTextField ccontent1 = new JTextField(20);
+	JTextField cmode1 = new JTextField(20);
+	JButton yes = new JButton("确认");
+	JButton no  = new JButton("返回");
+	JButton retur  = new JButton("重置");
+	
+
+	public Issue(String name)
+	{
+		frame=new JFrame("老师发布课程");
+		setTitle("老师发布课程");
+		setLayout(null);
+		ct = name;
+		cteacher1 = new JLabel(ct);
+		
+		cname.setBounds(100,60,100,50);
+		cname1.setBounds(200,70,200,30);
+		ctime.setBounds(100,110,100,50);
+		ctime1.setBounds(200,120,200,30);
+		crequire.setBounds(100,160,140,50);
+		crequire1.setBounds(200,170,200,30);
+		ccontent.setBounds(100,210,100,50);
+		ccontent1.setBounds(200,220,200,30);
+		cmode.setBounds(100,260,100,50);
+		cmode1.setBounds(200,270,200,30);
+		cteacher.setBounds(100,310,100,50);
+		cteacher1.setBounds(200,320,200,30);
+		caudit.setBounds(100,360,100,50);
+		caudit1.setBounds(200,370,200,30);
+		yes.setBounds(50,420, 100, 60);
+		no.setBounds(250, 420, 100,60);
+		retur.setBounds(450, 420, 100, 60);
+		
+		add(cname);
+		add(cname1);
+		add(ctime);
+		add(ctime1);
+		add(crequire);
+		add(crequire1);
+		add(ccontent);
+		add(ccontent1);
+		add(cmode);
+		add(cmode1);
+		add(cteacher);
+		add(cteacher1);
+		add(caudit);
+		add(caudit1);
+		add(yes);
+		add(no);
+		add(retur);
+
+		yes.addActionListener(this);
+		no.addActionListener(this);
+		retur.addActionListener(this);
+		
+		setVisible(true);
+		setBounds(400,100,600,600);
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		// TODO Auto-generated method stub
+		if(e.getSource()==no)
+		{
+			new Teacher(ct);
+			dispose();
+		}
+		if(e.getSource()==retur)
+		{
+			cname1.setText("");
+			ctime1.setText("");
+			crequire1.setText("");
+			ccontent1.setText("");
+			cmode1.setText("");
+			caudit1.setText("");
+		}
+		if(e.getSource()==yes)
+		{
+				String str1=cname1.getText();
+				int str2=ctime1.getColumns();
+				String str3=crequire1.getText();
+				String str4=ccontent1.getText();
+				String str5=cmode1.getText();
+////				time3 = Integer.valueOf(str2);
+//				time3 = str2.getColumns();
+				String strCon = "com.mysql.cj.jdbc.Driver";
+				String strURL = "jdbc:mysql://localhost:3306/javawork?serverTimezone=UTC";
+				String userName = "root";
+				String userPass = "root";
+				
+			
+				
+				try {
+					String sSql = "select * from teacher";
+					Class .forName(strCon);
+					Connection con2 = DriverManager.getConnection(strURL,userName,userPass);
+					Statement stmt2 = con2.createStatement();
+					ResultSet r2 = stmt2.executeQuery(sSql);
+					while(r2.next()) 
+					{
+						String name2 = r2.getString("usename");
+						String name3 = r2.getString("name");
+						if(ct.equals(name2))
+						{
+							Tname = name3;
+						}
+					}
+					r2.close();
+					stmt2.close();
+					con2.close();
+					} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					}
+				
+				try {
+					String strSql = "select * from course";
+					Class .forName(strCon);
+					Connection con1 = DriverManager.getConnection(strURL,userName,userPass);
+					Statement stmt1 = con1.createStatement();
+					ResultSet r1 = stmt1.executeQuery(strSql);
+					while(r1.next()) 
+					{
+						String name2 = r1.getString("name1");
+						if(str1.equals(name2))
+						{
+							System.out.println("你输入的课程名重复，请重新输入：");
+							new Teacher(Tname);
+							this.dispose();
+						}
+					}
+					System.out.println("正在录入数据库");
+					String sql = "insert into course(name1,time1,require1,content1,mode1,teacher1,audit1) values('"+str1+"','"+str2+"','"+str3+"','"+str4+"','"+str5+"','"+Tname+"',0)";
+					PreparedStatement presta = con1.prepareStatement(sql);
+					presta.execute();
+					
+					System.out.println("恭喜你！注册成功   "+str1+"  请等待管理员审核");
+					
+					r1.close();
+					stmt1.close();
+					con1.close();
+					} catch (Exception e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+					}
+				
+			new Teacher(ct);
+			this.dispose();
+				
+		}
+	}
+
+}
